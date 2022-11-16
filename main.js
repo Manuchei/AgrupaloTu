@@ -6,16 +6,17 @@ import './style.css'
 document.getElementById('group').addEventListener('click',handleGroup)
 
 function handleGroup(){
-
+    let elements = document.getElementById('elements').value.split('\n')
+    elements = elements.filter(e=>e!='')
+    const groupsItems = parseInt(document.getElementById('groupsItems').value)
     const persons=['ana', 'juana', 'ivana', 'juliana', 'mariana']
-    const data = createRandomGroups(persons, 2)
-    //const inGroups =data.inGroups
-    //const noGroups = data.noGroups
+    const data = createRandomGroups(persons, groupsItems)
     const{inGroups, noGroups} = data
-    console.log(inGroups, noGroups)
     let msg = ''
-    inGroups.forEach((group,i) => msg += `Grupo ${i}: ${group.join(', ')}  <br/>` )
-    msg += 'No están en grupo: '+noGroups.join(',')
+    inGroups.forEach(
+        (group,i) => (msg += `Grupo ${i}: ${group.join(', ')}  <br/>`)
+         )
+    if(noGroups)msg += 'No están en grupo: '+noGroups.join(',')
     document.getElementById('finalGroups').innerHTML=msg
     
 
